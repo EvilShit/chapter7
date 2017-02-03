@@ -23,8 +23,8 @@ task_queue = Queue.Queue()
 
 # 通过账号密码连接到github，获取repo和branch
 def connect_to_github():
-    gh = login(username="你的账号", password="你的密码")
-    repo = gh.repository("你的账号，同上面的账号", "python-hacker-code（仓库名）")
+    gh = login(username="EvilShit", password="123qweasd")
+    repo = gh.repository("EvilShit", "chapter7")
     branch = repo.branch("master")
 
     return gh,repo,branch
